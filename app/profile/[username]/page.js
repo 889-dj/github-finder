@@ -1,5 +1,6 @@
 import { getUser, getUserRepos } from '@/utils/github';
 import Link from 'next/link';
+import Image from 'next/image'
 
 export default async function ProfilePage({ params }) {
   const { username } = params;
@@ -11,10 +12,12 @@ export default async function ProfilePage({ params }) {
       <div className="flex flex-col items-center justify-center min-h-screen py-8">
         <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
           <div className="flex items-center mb-4">
-            <img
+            <Image
               src={user.avatar_url}
               alt={user.login}
-              className="w-16 h-16 rounded-full mr-4"
+              width={64}
+              height={64}
+              className="rounded-full mr-4"
             />
             <div>
               <h2 className="text-xl font-bold">{user.name}</h2>
@@ -41,8 +44,8 @@ export default async function ProfilePage({ params }) {
           <ul>
             {repos.map((repo) => (
               <li key={repo.id} className="mb-2">
-                
-                <a  href={repo.html_url}
+                <a  
+                  href={repo.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-500 hover:underline"
